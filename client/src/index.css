@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --spotify-green: hsl(141, 73%, 42%);
+}
+
+@layer components {
+  .btn-spotify {
+    display: block;
+    margin: 6px;
+    padding: 6px;
+    color: black;
+    background-color: var(--spotify-green);
+    border-radius: 25px;
+  }
+}

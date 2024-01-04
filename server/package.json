@@ -1,0 +1,30 @@
+{
+  "name": "collab-play-server",
+  "version": "1.0.0",
+  "description": "handle authorization and sessions",
+  "main": "index.js",
+  "scripts": {
+    "server": "npx tsc && nodemon -e ts --watch src dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ziwei Tan",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.5",
+    "dotenv": "^16.3.1",
+    "request": "^2.88.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  },
+  "nodemonConfig": {
+    "events": {
+      "restart": "npx tsc"
+    }
+  }
+}
