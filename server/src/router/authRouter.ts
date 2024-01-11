@@ -1,7 +1,7 @@
 import express from 'express'
 
 // to deter CSRF
-const generateRandomString = function (length) {
+export const generateRandomString = function (length) {
     let text = "";
     const possible =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

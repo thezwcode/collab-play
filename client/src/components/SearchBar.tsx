@@ -1,11 +1,11 @@
-import useDebounce from "../hooks/useDebounce";
-import SearchResultsList from "./SearchResultsList";
-
-const SearchBar: React.FC<{ token: string }> = ({ token }) => {
-  const [searchStr, setSearchStr] = useDebounce<string>("");
-
+const SearchBar: React.FC<{
+  onSearchStrChange: (searchStr: string) => void;
+}> = ({ onSearchStrChange }) => {
+  const searchStrHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onSearchStrChange(event.target.value);
+  };
   return (
-    <div>
+    <>
       <label htmlFor="searchStr">
         Search
         <input
@@ -13,14 +13,10 @@ const SearchBar: React.FC<{ token: string }> = ({ token }) => {
           id="searchStr"
           type="text"
           name="searchStr"
-          onChange={(event) => setSearchStr(event.target.value)}
-          onKeyDown={(event) =>
-            event.key === "enter" ?? setSearchStr(event.currentTarget.value)
-          }
+          onChange={searchStrHandler}
         />
       </label>
-      {searchStr && <SearchResultsList searchStr={searchStr} token={token} />}
-    </div>
+    </>
   );
 };
 

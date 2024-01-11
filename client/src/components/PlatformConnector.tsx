@@ -1,12 +1,11 @@
-import useToken from "../hooks/useToken";
-import Login from "./Login";
-import PlatformService from "./PlatformService";
+import SpotifyConnector from "./spotify/SpotifyConnector";
 
-const WebPlayer = () => {
-  const { token, getToken } = useToken();
-  getToken();
-
-  return <>{token === "" ? <Login /> : <PlatformService token={token} />}</>;
+const PlatformConnector = () => {
+  return (
+    <>
+      <SpotifyConnector />
+    </>
+  );
 };
 
-export default WebPlayer;
+export default PlatformConnector;

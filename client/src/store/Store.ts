@@ -1,25 +1,23 @@
+import { useCallback, useRef, useSyncExternalStore } from "react";
 
-export interface Subscriber<State> {
-
-}
-
+type Subscriber<State> = (state: State) => void
 
 export class Store<State extends Record<string, any>> {
     private subscribers = new Set<Subscriber<State>>();
 
     constructor(private state: State) { }
 
-    getValue() {
+    getState() {
         return this.state;
     }
 
-    setValue(newState: State | ((state: State) => State)) {
+    setState(newState: State | ((state: State) => State)) {
         this.state = typeof newState === 'function' ?
             newState(this.state) : newState;
         this.emit();
     }
 
-    updateValue(partialState: Partial<State>) {
+    updateState(partialState: Partial<State>) {
         this.state = { ...this.state, ...partialState }
         this.emit();
     }
@@ -35,14 +33,17 @@ export class Store<State extends Record<string, any>> {
     }
 }
 
+export function createStore<State extends Record<string, any>>(state: State) {
+    return new Store(state);
+}
+
 export function createSelectorHook<State extends Record<string, any>>(
     store: Store<State>
 ) {
-    return function useSelector<R>(selector: (state: State) => R =
-        (state) => state as R): R {
-        let currentState = useRef<R>(selector(store.getValue()));
+    return function useSelector<R>(selector: (state: State) => R): R {
+        let currentState = useRef<R>(selector(store.getState()));
 
-        const getSnapshot = () => selector(store.getValue())
+        const getSnapshot = () => selector(store.getState())
 
         return useSyncExternalStore(
             useCallback(cb => {

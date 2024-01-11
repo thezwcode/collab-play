@@ -1,16 +1,16 @@
-function Login() {
+const Login: React.FC<{ onTryLogin: (tryLogin: boolean) => void }> = ({
+  onTryLogin,
+}) => {
   return (
     <div className="flex flex-col justify-center items-center m-0">
       <header className="">
-        <a
-          className="btn-spotify"
-          href={`${import.meta.env.VITE_API_URL}/auth/login`}
-        >
+        <h2>Not logged in yet, please log in</h2>
+        <button className="btn-spotify" onClick={() => onTryLogin(true)}>
           Login with Spotify
-        </a>
+        </button>
       </header>
     </div>
   );
-}
+};
 
 export default Login;
